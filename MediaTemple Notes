@@ -1,0 +1,13 @@
+Mysql commands
+
+$ mysqldump --add-drop-table -h internal-db.s00000.gridserver.com -u username -p dbname > dbname.sql
+
+Example:
+$ mysqldump --add-drop-table -h internal-db.s61003.gridserver.com -u db61003_call_dev -p db61003_callcenter > ~/dbBackups/callcenter_9-6-2011.sql
+
+SSH:
+% = @
+
+ssh serveradmin%dkwidget.com@dkwidget.com
+
+mysql -u root -proot aztec < ~/dbBackup/Aztec_Staging.sql

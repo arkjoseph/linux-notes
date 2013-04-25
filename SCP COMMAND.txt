@@ -1,0 +1,21 @@
+Copying files to desktop
+
+$ scp username@url.com:path/to/server/folder ~/Destination/Path
+	scp pca@thenewhomecompany.com:home/pca/db-backup/NHC-2011-05-27.sql ~/Desktop
+$ scp pca@173.203.117.202:/home/pca/db-backup/db_dump-2011-05-31.sql ~/Desktop
+
+
+Examples below:
+-r .... recursive into sub directories.
+
+$ scp g2fit@174.132.68.221:public_html.zip ~/Desktop
+$ scp -r pcaclien@pcaclients.com:public_html/sites/default/files/private/terr ~/TerraneaFinal
+
+Copying files from Desktop
+$ scp ~/Documents/dbBackups/dk_LocalHost_uversCallCenter-afterUpdates serveradmin%dkwidget.com@dkwidget.com:/home/61003/users/.home/dbBackups
+	
+$ scp ~/local/source username@url.com:path/to/server/folder
+
+$ scp ~/Desktop/TerraneaFinal.mov pcaclien@pcaclients.com:public_html/sites/default/files/private/terr
+
+Copying files from server to server.

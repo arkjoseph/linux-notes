@@ -1,0 +1,107 @@
+Import DB:
+	 mysql internal-db.s61003.gridserver.com -u db61003 -p db61003_sundance12 < /Documents/siteAssets/dbbackups/dk_local_Sundance12.sql
+	 
+	 mysql internal-db.s61003.gridserver.com -u db61003_call_dev -p db61003_callcenter < 
+	 
+	 mysql -u root -proot aztec < ~/dbBackup/Aztec_Staging.sql
+
+DUMP DB:
+	mysqldump --add-drop-table -h internal-db.s61003.gridserver.com -u db61003 -p db61003_ffy > ffy_4-30-12.sql
+
+MAMP Import
+	/applications/MAMP/library/bin/mysql -u root -p root < ~/Desktop/NHC-2011-05-27.sql
+
+Secure Copy
+	scp g2fit@174.132.68.221:public_html.zip ~/Desktop
+
+Database Dump:
+	mysqldump -uroot -pNB5a12C aztectents > db_dump01.sql
+
+Run In Background:
+	cntrl-z 
+	bg
+
+Display Running Process's
+	ps
+
+
+Copy to desktop:
+	scp g2fit@174.132.68.221:public_html.zip ~/Desktop
+	
+insert:
+	insert into ContentPartner values(108, 'Budget Rent a Car', 'DIRECT', NULL);
+
+removing:
+	delete from HotelLocationMapping where ContentPartner=85 OR ContentPartner=86;
+	delete from TMP_test s
+	using TMP_test s
+	inner join AirportMainCity a on(s.dest=a.airport)
+	inner join LocationLookup ll on(a.location=ll.id)
+	where ll.country=1272 and
+	s.SyndicationPartner>=1330 and s.SyndicationPartner<=1334;
+
+
+
+updating:
+	UPDATE CampaignDisplay SET SiteID=24 where SiteID=103;
+
+rename table:
+	rename table LogData_PagesOnly_04_2 to LogData_PagesOnly_04_bot;
+
+rename a field:
+	ALTER TABLE `SEMHotelAirportMapping` CHANGE `Airport` `Dest` CHAR( 3 );
+
+Creating new table
+	create table <table name> (<field1> <type>, <field2> <type>, ...);
+	create table TMP_Routes (Airport char(3), Name varchar(100));
+
+Creating table from result set of another table or from a query:
+	CREATE TABLE new_tbl (SELECT * FROM orig_tbl);
+	CREATE TABLE new_tbl SELECT <query>;
+No Data, just structure:
+	CREATE TABLE new_tbl (SELECT * FROM orig_tbl limit 0);
+
+
+Creating table structure:
+	Show CREATE TABLE old_tbl;
+
+Dropping tables:
+	drop table old_tbl;
+
+Appending to existing table from another table:
+	insert into student2 select * from student where class = 'Four';
+
+Loading local file to dbase(ignore 1 lines skips 1st row in file):
+	LOAD DATA INFILE "/home/amir/clientUpdates/IHG/OneTime_hoteldb_December07_inactive"
+INTO TABLE TMP_IHG
+IGNORE 1 LINES
+
+Restoring backed up tables
+bzcat -d -c <FILE_NAME>.bz2 | mysql -u root -p<password> -h <DB_HOST> OT2 &
+
+Export to another db:
+	mysqldump -u root -p..sql, --opt -h otdb01 OT2 <table> | mysql -u root -p..sql, -h <host> OT2
+
+Export to another db(structure only):
+	mysqldump -u root -p..sql, --opt -d -h otdb01 OT2 <table> | mysql -u root -p..sql, -h <host> OT2
+
+If table exists:
+	mysqldump --add-drop-table -u root -p..sql, --opt -h otdb01 OT2 <table> | mysql -u root -p..sql, -h <host> OT2
+
+Running shell commands in mysql:
+\! <command>
+ex. \! clear (to clear screen)
+
+permissions:
+ GRANT ALL PRIVILEGES ON OT2.* TO root@192.168.208.201 IDENTIFIED BY '..sql,';
+
+
+Export from live db:
+	 mysqldump -u root -p..sql, --opt -d -h 10.10.0.11 OT2 CampaignDisplayEditLog | mysql -u root -p..sql, -h file OT2
+
+
+
+
+
+
+

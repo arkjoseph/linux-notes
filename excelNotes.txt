@@ -1,0 +1,21 @@
+Excel and OpenOffice CALC
+
+Remove Dups
+
+Sort the data range by column A.
+Choose Data - Sort.
+Click Cell c1. Enter the formula:
+
+=IF(A1=A2;1;0)
+
+1. This will display 1 if the current row has the same value in column A as the next row. It will display 0 if the values are different.
+2. Copy the formula down for all rows of the data range.
+3. Drag the lower right edge of the cell C1 down to the last row.
+4. Now the formulas must be replaced by their values to freeze the contents.
+5. While the column C is still highlighted, press Ctrl+C to copy all selected cells to the clipboard.
+6. Press Shift+Ctrl+V to open the Paste Special dialog box.
+7. In the Selection area, enable only the Numbers command; disable the other Selection commands. Click OK.
+8. Select the whole data range including the new column C and sort the range by column C.
+Choose Data - Sort.
+9. Select all rows which have a value 1 in column C, then press Del key.
+10. Optional steps: Delete column C. Select the remaining rows and sort them again by column A.

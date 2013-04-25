@@ -1,0 +1,72 @@
+Checking out a site after the subdomain has been created and a local copy exists in subclips.
+
+Inside the pca/public_html folder
+$ asdf [destination folder(no path)]
+
+Example:
+$ svn co -q file:///var/www/svn/repos/sites/trunk/evilution .
+  svn co -q file:///var/www/svn/repos/zen .
+
+	
+$ /usr/bin/svn/svn co -q file:///var/www/svn/repos/sites/trunk/evilution .
+
+Checkout to a remote server svn+ssh
+svn checkout -q svn+ssh://pca@pcanewmedia.com/home/svn/pca/sites/trunk/nhc nhc-dev
+
+(make sure Settings.php is ignored by SVN.)
+
+VI settings.php and change the db login info.
+
+--------
+Add files to version control if they were manually transferred via ftp or SCP'd
+
+Example:
+$svn status
+
+M /Path/to/file
+D /path/to/file1
+A /path/to/file1
+? /path/to/file2 <--- we want to add this file 
+
+$svn add /path/to/file2
+$svn commit -m"comment"
+
+In case of M use [ svn revert /path/to/file2 ] to use the latest committed file version. Be careful that this will over write any file that was manually updated via ftp so be sure to obtain the file yourself.
+
+-------
+
+Branching/Switching/Merging
+
+Do this after you have committed your changes from your branch in subclipse. 
+--Switch to branch on dev/live site:
+Example:
+
+$svn info [confirm that trunk is currently the repo root url]
+Repository Root: file:///home/svn/pca/sites/branches/amir-....
+
+svn sw -q file:///var/www/svn/repos/sites/branches/ai-contactmoduleChanges_7-7-2011 .
+
+$svn sw -q file:///home/svn/pca/sites/branches/tor-joe-hotelsPage-2011-05-20 . [. inside current dir]
+or 
+$svn sw -q svn+ssh://pca@174.132.68.210/home/svn/pca/sites/branches/cvs-joe-introGalleryUpdates-2011-06-22 .
+
+$svn up [shouldn't display anything but nice to see it]
+
+-------
+Merge Your Changes after you have completed your branch changes in subclipse
+
+Dry run [for testing] inside of dev/live folder.
+[5279 is obtained from subclips 'Branch History'][HEAD is latest revision from my branch]
+
+$svn merge --dry-run -r 5279:HEAD file:///home/svn/pca/sites/branches/tor-joe-hotelsPage-2011-2011-05-20
+
+Assuming no conflicts are displayed re-do command without --dry-run:
+
+$svn merge -r 5279:HEAD file:///home/svn/pca/sites/branches/tor-joe-hotelsPage-2011-2011-05-20
+
+Then Commit your merged files to the site.
+[comment is obtained from subclips. Branch dir]
+
+$svn commit -m"svn merge -r 5279:HEAD file:///home/svn/pca/sites/branches/tor-joe-hotelsPage-2011-2011-05-20"
+
+

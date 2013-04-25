@@ -1,0 +1,108 @@
+Linux version:
+cat /etc/*-release
+
+Hardware info:
+lshw
+
+Hard Drive Space:
+df -h
+
+The id command prints information for a certain user. Use it like this:
+
+# id username
+
+Create a user
+
+To create a new user:
+
+# useradd -c "My Example User" username
+# passwd username
+
+The created user is initially in an inactive state. To activate the user you have to assign a password with passwd. Some useful useradd options include the following:
+-c : sets a comment for the user.
+-s : is used in order to define the user’s default login shell. If not used, then the system’s default shell becomes the user’s default login shell.
+-r : creates a user with UID<500 (system account)
+-d : sets the user’s home directory. If not used, the default home directory is created (/home/username/)
+-M : the home directory is not created. This is useful when the directory already exists.
+
+
+List all users on the system:
+awk -F":" '{ print "username: " $1 "\t\tuid:" $3 }' /etc/passwd
+
+List all users with a home directory
+cat /etc/passwd |grep "/bin/bash" |grep "[5-9][0-9][0-9]" |cut -d: -f1
+
+
+
+To create a user that does not have the ability to login to a shell, issue the following commands:
+
+# useradd -c "This user cannot login to a shell" -s /sbin/nologin username
+# passwd username
+
+Change the user’s password
+
+To change a user’s password:
+
+# passwd username
+
+If it’s used without specifying a username, then the currently logged in user’s password is changed.
+Add a user to a group
+
+Usermod is used to modify a user account’s settings. Check the man page for all the available options. One useful use of this command is to add a user to a group:
+
+# usermod -a -G group1 username
+
+The -a option is critical. The user is added to group1 while he continues to be a member of other groups. If it’s not used, then the user is added only to group1 and removed from any other groups. So, take note!
+Remove a user from a group
+
+Removing a user from a group is a bit trickier. Unfortunately, there is no direct command, at least not in Fedora or RHEL, that can do that from command line. At first you need to get a list of groups that your user is a member of:
+
+# id -nG username
+group1 group2 group3 ....
+
+Then you need to put all these groups as a comma-separated list to the usermod -G option, except for the group from which you want the user to be removed. So, to remove the user from group2, issue the command:
+
+# usermod -G group1,group3,... username
+
+Lock and Unlock user accounts
+
+Other common usermod uses are to lock and unlock user accounts. To lock out a user:
+
+# usermod -L username
+
+To unlock the user:
+
+# usermod -U username
+
+Delete a user
+
+Userdel is used to delete a user account. If the -r option is used then the user’s home directory and mail spool are deleted too:
+
+# userdel -r username
+
+Create a new group
+
+To create a new group, issue the command:
+
+# groupadd groupname
+
+The -r option can be used to create a group with GID<500 (system).
+Change a group’s name
+
+Groupmod can be used to change a group name:
+
+# groupmod -n newgroupname groupname
+
+Delete a group
+
+Groupdel can delete a group:
+
+# groupdel groupname
+
+In order to delete a user’s primary group (usually this is the group with name equal to the username) the respective user must be deleted previously.
+
+You can find more info in the man pages, but these will do in most cases.
+
+
+
+

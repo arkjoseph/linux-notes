@@ -1,0 +1,1 @@
+Interactive-4:/ interactive4$ mysql -u root -proot aztec < ~/dbBackup/Aztec_Staging_After_Update.sql
